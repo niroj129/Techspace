@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products List</title>
+<link rel="stylesheet" href="..//stylesheets/productlist.css">
+</head>
+<body>
+<div class="container1">
+    
+<body>
+    <section>
+        <div class="sidebar">
+            <div class="menu">
+                <img class="logo" src="../stylesheets/images/logo (1).png" alt="logo">
+                <div class="input-box">
+                    <input type="text" placeholder="Search" class="input-field" autocomplete="off">
+                    <div class="icon">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="horizontal_line"></div>
+                <div class="container">
+                    <ul>
+                        <li class="active">
+                            <a href="#">
+                                <img src="../stylesheets/images/icons8-dashboard-24.png" alt="search icon"> <!-- Replace with your SVG file -->
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="../stylesheets/images/order.svg" alt="search icon"> <!-- Replace with your SVG file -->
+
+                                <span>Order List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="../stylesheets/images/productlist.svg" alt="product">
+                                <span>Product List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="../stylesheets/images/message.svg" alt="message"> <!-- Replace with your SVG file -->
+
+                                <span>Message</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="../stylesheets/images/settings.svg" alt="settings"> <!-- Replace with your SVG file -->
+
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <div class="main">
+        <h1>Products List</h1>
+        
+        <div class="product-header">
+            <span class="ram">380 Products Found</span>
+            <button id="openModalBtn" class="add-product-btn">Add Product +</button>
+        </div>
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ST_101</td>
+                    <td>Samsung S23 Ultra</td>
+                    <td>Smartphones & Tablets</td>
+                    <td>Rs.43,289</td>
+                    <td>120</td>
+                    <td><img src="../stylesheets/images/edit.png" alt="Edit" onclick="editProduct('ST_101');" style="cursor:pointer;">
+                        |
+                        <img src="../stylesheets/images/trash-2.png" alt="Delete" onclick="deleteProduct('ST_101');" style="cursor:pointer;"> <td>
+
+                </tr>
+                
+            </tbody>
+            
+        </table>
+        <div class="numbers">
+            
+            <span style="color:#9BA4B4;">Showing 7 of 380 Products</span>
+            <div class="numbers-controls">
+                <a href="#">&lt;</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+	<div class="modal-overlay" id="addProductModal">
+		<div class="modal">
+			<div class="modal-header">
+				<h2>Add Product</h2>
+				<button class="close-modal" onclick="closeModal()">×</button>
+			</div>
+			<div class="modal-content">
+				<form id="addProductForm">
+					<div class="form-group">
+						<label for="productId">Product ID</label>
+						<input type="text" id="productId" placeholder="Enter the Product ID">
+					</div>
+					<div class="form-group">
+						<label for="productName">Product Name</label>
+						<input type="text" id="productName" placeholder="Enter Product Name">
+					</div>
+					<div class="form-group">
+						<label for="category">Category</label>
+						<select id="category">
+							<option value="">Select Category</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="stock">Stock</label>
+						<input type="number" id="stock" placeholder="Add Stock">
+					</div>
+					<div class="form-group">
+						<label for="price">Price</label>
+						<input type="text" id="price" placeholder="Enter Price">
+					</div>
+					<div class="form-group">
+						<label for="color">Color</label>
+						<select id="color">
+							<option value="">Select Color</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="shortDescription">Product short Description</label>
+						<textarea id="shortDescription" placeholder="Enter short description here..."></textarea>
+					</div>
+					<div class="form-group">
+						<label for="fullDescription">Product Full Description</label>
+						<textarea id="fullDescription" placeholder="Enter full description here..."></textarea>
+					</div>
+					<div class="form-group">
+						<label for="imageUpload">Product Image</label>
+						<input type="file" id="imageUpload">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Add Product</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-overlay" id="editProductModal">
+		<div class="modal">
+			<div class="modal-header">
+				<h2>Edit Product</h2>
+				<button class="close-modal" onclick="closeModal('editProductModal')">×</button>
+			</div>
+			<div class="modal-content">
+				<form id="editProductForm">
+					<div class="form-group">
+						<label for="editProductId">Product ID</label>
+						<input type="text" id="editProductId" placeholder="Enter the Product ID" disabled>
+					</div>
+					<div class="form-group">
+						<label for="editProductName">Product Name</label>
+						<input type="text" id="editProductName" placeholder="Enter Product Name">
+					</div>
+					<div class="form-group">
+						<label for="editCategory">Category</label>
+						<select id="editCategory">
+							<option value="">Select Category</option>
+							<option value="smartphones">Smartphones & Tablets</option>
+							<option value="wearable">Wearable Technology</option>
+							<option value="laptops">Laptops & Computers</option>
+							<option value="audio">Audio Devices</option>
+							
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="editPrice">Price</label>
+						<input type="text" id="editPrice" placeholder="Enter Price">
+					</div>
+					<div class="form-group">
+						<label for="editStock">Stock</label>
+						<input type="number" id="editStock" placeholder="Add Stock">
+					</div>
+					<div class="form-group">
+						<label for="editColor">Color</label>
+						<select id="editColor">
+							<option value="">Select Color</option>
+							<option value="black">Black</option>
+							<option value="white">White</option>
+							<option value="blue">Blue</option>
+							<option value="red">Red</option>
+							
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="editShortDescription">Product Short Description</label>
+						<textarea id="editShortDescription" placeholder="Enter short description here..."></textarea>
+					</div>
+					<div class="form-group">
+						<label for="editFullDescription">Product Full Description</label>
+						<textarea id="editFullDescription" placeholder="Enter full description here..."></textarea>
+					</div>
+					<div class="form-group">
+						<label for="editImageUpload">Product Image</label>
+						<input type="file" id="editImageUpload">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Save Product</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function closeModal() {
+			document.getElementById('addProductModal').style.display = 'none';
+			document.getElementById('editProductModal').style.display = 'none';
+		}
+		
+		document.getElementById('openModalBtn').onclick = function() {
+			document.getElementById('addProductModal').style.display = 'flex';
+		};
+		
+		window.onclick = function(event) {
+			var modal = document.getElementById('addProductModal');
+			if (event.target === modal) {
+				closeModal();
+			}
+		};
+	  
+	
+		function editProduct(productId) {
+			// Example function body, adjust as needed
+			document.getElementById('editProductId').value = productId;
+			document.getElementById('editProductModal').style.display = 'flex';
+		}
+	
+		// Event listeners for closing modals if clicked outside
+		window.onclick = function(event) {
+			var editModal = document.getElementById('editProductModal');
+			if (event.target === editModal) {
+				closeModal('editProductModal');
+			}
+		};
+	
+	  
+		</script>
+</body>
+</html>
